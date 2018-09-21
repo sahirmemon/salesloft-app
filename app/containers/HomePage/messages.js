@@ -26,4 +26,16 @@ export default defineMessages({
     id: 'app.components.HomePage.hideFrequencyCountButton',
     defaultMessage: 'Hide Frequency Count',
   },
+  duplicates: {
+    id: 'app.components.HomePage.duplicates',
+    defaultMessage: 'Level 3: Duplicates',
+  },
+  showDuplicatesButton: {
+    id: 'app.components.HomePage.showDuplicatesButton',
+    defaultMessage: 'Show Duplicates',
+  },
+  hideDuplicatesButton: {
+    id: 'app.components.HomePage.hideDuplicatesButton',
+    defaultMessage: 'Hide Duplicates',
+  },
 });

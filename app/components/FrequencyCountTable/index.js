@@ -24,21 +24,34 @@ class FrequencyCountTable extends React.PureComponent {
   // Returns a Map(key, value) where key is the character and value is the
   // count.
   getFrequencyCount(people) {
-    const counts = new Map();
+    let counts = new Map();
     people.forEach(person => {
-      const characters = person.email_address.split('');
-      characters.forEach(char => {
-        if (counts.has(char)) {
-          counts.set(char, counts.get(char) + 1);
-        } else {
-          counts.set(char, 1);
-        }
-      });
+      if (person.email_address) {
+        counts = this.countCharacters(person.email_address, counts);
+      }
+      if (person.personal_email_address) {
+        counts = this.countCharacters(person.personal_email_address, counts);
+      }
+      if (person.secondary_email_address) {
+        counts = this.countCharacters(person.secondary_email_address, counts);
+      }
     });
     const countsDescending = new Map(
       [...counts.entries()].sort((a, b) => b[1] - a[1]),
     );
     return countsDescending;
+  }
+  // Returns the count of the characters in the string provided
+  countCharacters(emailAddress, counts) {
+    const characters = emailAddress.split('');
+    characters.forEach(char => {
+      if (counts.has(char)) {
+        counts.set(char, counts.get(char) + 1);
+      } else {
+        counts.set(char, 1);
+      }
+    });
+    return counts;
   }
 
   render() {

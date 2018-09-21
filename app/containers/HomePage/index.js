@@ -20,6 +20,7 @@ import styled from 'styled-components';
 
 import PeopleTable from 'components/PeopleTable/Loadable';
 import FrequencyCountTable from 'components/FrequencyCountTable/Loadable';
+import DuplicatesTable from 'components/DuplicatesTable/Loadable';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import {
@@ -44,8 +45,10 @@ export class HomePage extends React.PureComponent {
   constructor() {
     super();
     this.handleFrequencyCountClick = this.handleFrequencyCountClick.bind(this);
+    this.handleDuplicatesClick = this.handleDuplicatesClick.bind(this);
     this.state = {
       toggleFrequencyCountTable: false,
+      toggleDuplicatesTable: false,
     };
   }
 
@@ -61,9 +64,16 @@ export class HomePage extends React.PureComponent {
     });
   }
 
+  handleDuplicatesClick() {
+    const { toggleDuplicatesTable } = this.state;
+    this.setState({
+      toggleDuplicatesTable: !toggleDuplicatesTable,
+    });
+  }
+
   render() {
     const { loading, error, people } = this.props;
-    const { toggleFrequencyCountTable } = this.state;
+    const { toggleFrequencyCountTable, toggleDuplicatesTable } = this.state;
     if (loading) {
       return (
         <Background>
@@ -116,6 +126,30 @@ export class HomePage extends React.PureComponent {
               </Button>
               {toggleFrequencyCountTable && (
                 <FrequencyCountTable people={people.data} />
+              )}
+            </Grid>
+          </Grid>
+        </Background>
+        <Background>
+          <Grid container spacing={24}>
+            <Grid item xs>
+              <Typography variant="display1" gutterBottom>
+                <FormattedMessage {...messages.duplicates} />
+              </Typography>
+              <Button
+                variant="outlined"
+                color="primary"
+                onClick={this.handleDuplicatesClick}
+              >
+                {!toggleDuplicatesTable && (
+                  <FormattedMessage {...messages.showDuplicatesButton} />
+                )}
+                {toggleDuplicatesTable && (
+                  <FormattedMessage {...messages.hideDuplicatesButton} />
+                )}
+              </Button>
+              {toggleDuplicatesTable && (
+                <DuplicatesTable people={people.data} />
               )}
             </Grid>
           </Grid>
