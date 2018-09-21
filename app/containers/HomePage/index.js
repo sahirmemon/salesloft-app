@@ -15,7 +15,10 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { FormattedMessage } from 'react-intl';
+import { Grid, Paper, Typography } from '@material-ui/core';
+import styled from 'styled-components';
 
+import PeopleTable from 'components/PeopleTable/Loadable';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import {
@@ -28,6 +31,13 @@ import reducer from './reducer';
 import saga from './saga';
 import { loadPeopleAction } from './actions';
 
+const Background = styled(Paper)`
+  && {
+    margin: 0px;
+    padding: 25px;
+  }
+`;
+
 /* eslint-disable react/prefer-stateless-function */
 export class HomePage extends React.PureComponent {
   // Fetch People on load
@@ -39,24 +49,35 @@ export class HomePage extends React.PureComponent {
     const { loading, error, people } = this.props;
     if (loading) {
       return (
-        <div>
-          <h3>Looks like we are still loading...</h3>
-        </div>
+        <Background>
+          <Typography variant="subheading" gutterBottom>
+            <FormattedMessage {...messages.loading} />
+          </Typography>
+        </Background>
       );
     }
 
     if (error) {
       return (
-        <div>
-          <h3>{error}</h3>
-        </div>
+        <Background>
+          <Typography variant="subheading" gutterBottom>
+            {error}
+          </Typography>
+        </Background>
       );
     }
 
     return (
-      <h1>
-        <FormattedMessage {...messages.header} />
-      </h1>
+      <Background>
+        <Grid container spacing={12}>
+          <Grid item xs>
+            <Typography variant="display2" gutterBottom>
+              <FormattedMessage {...messages.header} />
+            </Typography>
+            <PeopleTable people={people.data} />
+          </Grid>
+        </Grid>
+      </Background>
     );
   }
 }
