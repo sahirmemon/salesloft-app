@@ -1,13 +1,13 @@
-import { defaultAction } from '../actions';
-import { DEFAULT_ACTION } from '../constants';
+import { loadPeopleAction } from '../actions';
+import { LOAD_PEOPLE } from '../constants';
 
 describe('PeopleList actions', () => {
-  describe('Default Action', () => {
-    it('has a type of DEFAULT_ACTION', () => {
+  describe('Load Action', () => {
+    it('has a type of LOAD_PEOPLE', () => {
       const expected = {
-        type: DEFAULT_ACTION,
+        type: LOAD_PEOPLE,
       };
-      expect(defaultAction()).toEqual(expected);
+      expect(loadPeopleAction()).toEqual(expected);
     });
   });
 });
