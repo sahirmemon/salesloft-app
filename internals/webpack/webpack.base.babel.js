@@ -125,6 +125,9 @@ module.exports = options => ({
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+        PORT: JSON.stringify(process.env.PORT),
+        SALESLOFT_API_URL: JSON.stringify(process.env.SALESLOFT_API_URL),
+        SALESLOFT_API_KEY: JSON.stringify(process.env.SALESLOFT_API_KEY),
       },
     }),
   ]),
@@ -132,6 +135,11 @@ module.exports = options => ({
     modules: ['node_modules', 'app'],
     extensions: ['.js', '.jsx', '.react.js'],
     mainFields: ['browser', 'jsnext:main', 'main'],
+  },
+  node: {
+    fs: 'empty',
+    net: 'empty',
+    dns: 'empty',
   },
   devtool: options.devtool,
   target: 'web', // Make web variables accessible to webpack, e.g. window

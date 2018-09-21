@@ -10,12 +10,49 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { compose } from 'redux';
 import { FormattedMessage } from 'react-intl';
+
+import injectSaga from 'utils/injectSaga';
+import injectReducer from 'utils/injectReducer';
+import {
+  makeSelectLoading,
+  makeSelectError,
+  makeSelectPeople,
+} from './selectors';
 import messages from './messages';
+import reducer from './reducer';
+import saga from './saga';
+import { loadPeopleAction } from './actions';
 
 /* eslint-disable react/prefer-stateless-function */
-export default class HomePage extends React.PureComponent {
+export class HomePage extends React.PureComponent {
+  // Fetch People on load
+  componentDidMount() {
+    this.props.onLoad();
+  }
+
   render() {
+    const { loading, error, people } = this.props;
+    if (loading) {
+      return (
+        <div>
+          <h3>Looks like we are still loading...</h3>
+        </div>
+      );
+    }
+
+    if (error) {
+      return (
+        <div>
+          <h3>{error}</h3>
+        </div>
+      );
+    }
+
     return (
       <h1>
         <FormattedMessage {...messages.header} />
@@ -23,3 +60,43 @@ export default class HomePage extends React.PureComponent {
     );
   }
 }
+
+HomePage.propTypes = {
+  loading: PropTypes.bool,
+  error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+  people: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+  onLoad: PropTypes.func,
+};
+
+HomePage.defaultProps = {
+  loading: null,
+  error: null,
+  people: null,
+  onLoad: null,
+};
+
+const mapStateToProps = createStructuredSelector({
+  loading: makeSelectLoading(),
+  error: makeSelectError(),
+  people: makeSelectPeople(),
+});
+
+function mapDispatchToProps(dispatch) {
+  return {
+    onLoad: () => dispatch(loadPeopleAction()),
+  };
+}
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+);
+
+const withReducer = injectReducer({ key: 'homePage', reducer });
+const withSaga = injectSaga({ key: 'homePage', saga });
+
+export default compose(
+  withReducer,
+  withSaga,
+  withConnect,
+)(HomePage);
