@@ -6,7 +6,6 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-// import styled from 'styled-components';
 import {
   Table,
   TableBody,
@@ -45,7 +44,7 @@ class PeopleTable extends React.PureComponent {
 }
 
 PeopleTable.propTypes = {
-  people: PropTypes.array,
+  people: PropTypes.array.isRequired,
 };
 
 export default PeopleTable;

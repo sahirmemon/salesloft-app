@@ -15,10 +15,11 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { FormattedMessage } from 'react-intl';
-import { Grid, Paper, Typography } from '@material-ui/core';
+import { Button, Grid, Paper, Typography } from '@material-ui/core';
 import styled from 'styled-components';
 
 import PeopleTable from 'components/PeopleTable/Loadable';
+import FrequencyCountTable from 'components/FrequencyCountTable/Loadable';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import {
@@ -40,13 +41,29 @@ const Background = styled(Paper)`
 
 /* eslint-disable react/prefer-stateless-function */
 export class HomePage extends React.PureComponent {
+  constructor() {
+    super();
+    this.handleFrequencyCountClick = this.handleFrequencyCountClick.bind(this);
+    this.state = {
+      toggleFrequencyCountTable: false,
+    };
+  }
+
   // Fetch People on load
   componentDidMount() {
     this.props.onLoad();
   }
 
+  handleFrequencyCountClick() {
+    const { toggleFrequencyCountTable } = this.state;
+    this.setState({
+      toggleFrequencyCountTable: !toggleFrequencyCountTable,
+    });
+  }
+
   render() {
     const { loading, error, people } = this.props;
+    const { toggleFrequencyCountTable } = this.state;
     if (loading) {
       return (
         <Background>
@@ -68,16 +85,42 @@ export class HomePage extends React.PureComponent {
     }
 
     return (
-      <Background>
-        <Grid container spacing={12}>
-          <Grid item xs>
-            <Typography variant="display2" gutterBottom>
-              <FormattedMessage {...messages.header} />
-            </Typography>
-            <PeopleTable people={people.data} />
+      <div>
+        <Background>
+          <Grid container spacing={24}>
+            <Grid item xs>
+              <Typography variant="display2" gutterBottom>
+                <FormattedMessage {...messages.header} />
+              </Typography>
+              <PeopleTable people={people.data} />
+            </Grid>
           </Grid>
-        </Grid>
-      </Background>
+        </Background>
+        <Background>
+          <Grid container spacing={24}>
+            <Grid item xs>
+              <Typography variant="display1" gutterBottom>
+                <FormattedMessage {...messages.frequencyCount} />
+              </Typography>
+              <Button
+                variant="outlined"
+                color="primary"
+                onClick={this.handleFrequencyCountClick}
+              >
+                {!toggleFrequencyCountTable && (
+                  <FormattedMessage {...messages.showFrequencyCountButton} />
+                )}
+                {toggleFrequencyCountTable && (
+                  <FormattedMessage {...messages.hideFrequencyCountButton} />
+                )}
+              </Button>
+              {toggleFrequencyCountTable && (
+                <FrequencyCountTable people={people.data} />
+              )}
+            </Grid>
+          </Grid>
+        </Background>
+      </div>
     );
   }
 }
