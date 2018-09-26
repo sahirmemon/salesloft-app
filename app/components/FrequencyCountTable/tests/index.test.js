@@ -11,7 +11,7 @@ describe('<FrequencyCountTable />', () => {
 
 describe('Test Frequency Count', () => {
   it('Count should be equal', () => {
-    const test = [{ email_address: 'a@a.a' }];
+    const test = [{ emailAddress: 'a@a.a' }];
     const shouldReturn = new Map();
     shouldReturn.set('a', 3);
     shouldReturn.set('@', 1);

@@ -5,14 +5,8 @@
 function getFrequencyCount(people) {
   let counts = new Map();
   people.forEach(person => {
-    if (person.email_address) {
-      counts = countCharacters(person.email_address, counts);
-    }
-    if (person.personal_email_address) {
-      counts = countCharacters(person.personal_email_address, counts);
-    }
-    if (person.secondary_email_address) {
-      counts = countCharacters(person.secondary_email_address, counts);
+    if (person.emailAddress) {
+      counts = countCharacters(person.emailAddress, counts);
     }
   });
   const countsDescending = new Map(

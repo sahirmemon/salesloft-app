@@ -30,11 +30,9 @@ class PeopleTable extends React.PureComponent {
         <TableBody>
           {people.map(person => (
             <TableRow key={person.id}>
-              <TableCell>
-                {person.first_name} {person.last_name}
-              </TableCell>
-              <TableCell>{person.title}</TableCell>
-              <TableCell>{person.email_address}</TableCell>
+              <TableCell>{person.name}</TableCell>
+              <TableCell>{person.jobTitle}</TableCell>
+              <TableCell>{person.emailAddress}</TableCell>
             </TableRow>
           ))}
         </TableBody>

@@ -102,7 +102,7 @@ export class HomePage extends React.PureComponent {
               <Typography variant="display2" gutterBottom>
                 <FormattedMessage {...messages.header} />
               </Typography>
-              <PeopleTable people={people.data} />
+              <PeopleTable people={people} />
             </Grid>
           </Grid>
         </Background>
@@ -125,7 +125,7 @@ export class HomePage extends React.PureComponent {
                 )}
               </Button>
               {toggleFrequencyCountTable && (
-                <FrequencyCountTable people={people.data} />
+                <FrequencyCountTable people={people} />
               )}
             </Grid>
           </Grid>
@@ -148,9 +148,7 @@ export class HomePage extends React.PureComponent {
                   <FormattedMessage {...messages.hideDuplicatesButton} />
                 )}
               </Button>
-              {toggleDuplicatesTable && (
-                <DuplicatesTable people={people.data} />
-              )}
+              {toggleDuplicatesTable && <DuplicatesTable people={people} />}
             </Grid>
           </Grid>
         </Background>

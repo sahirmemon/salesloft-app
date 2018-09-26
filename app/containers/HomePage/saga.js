@@ -7,7 +7,7 @@ import { loadPeopleSuccessAction, loadPeopleErrorAction } from './actions';
 
 // Gets all PEOPLE from SalesLoft API and calls the success action
 export function* getPeople() {
-  const requestUrl = `${config.apiUrl}/v2/people.json`;
+  const requestUrl = `${config.apiUrl}/api/people`;
   try {
     const people = yield call(request, requestUrl, {
       method: 'GET',

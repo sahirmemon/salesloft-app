@@ -4,8 +4,8 @@ count of characters in email addresses as well as possible duplicate email addre
 
 ## Development
 1. Create `.env` file in root directory
-1. Add `SALESLOFT_API_URL=<api url>`  
-1. Add `SALESLOFT_API_KEY=<api key>`
+1. Add `API_URL=<api url>`  
+1. Add `API_KEY=<api key>`
 1. `npm install`
 1. `npm run start`
 1. Open browser to `localhost:3000`

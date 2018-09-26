@@ -126,8 +126,8 @@ module.exports = options => ({
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
         PORT: JSON.stringify(process.env.PORT),
-        SALESLOFT_API_URL: JSON.stringify(process.env.SALESLOFT_API_URL),
-        SALESLOFT_API_KEY: JSON.stringify(process.env.SALESLOFT_API_KEY),
+        API_URL: JSON.stringify(process.env.API_URL),
+        API_KEY: JSON.stringify(process.env.API_KEY),
       },
     }),
   ]),

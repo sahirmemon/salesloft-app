@@ -29,8 +29,8 @@ class DuplicatesTable extends React.PureComponent {
   // https://en.wikipedia.org/wiki/Levenshtein_distance
   // Possible implementation: https://coderwall.com/p/uop8jw/fast-and-working-levenshtein-algorithm-in-javascript
   checkForDuplicate(person1, person2) {
-    const person1EmailChars = person1.email_address.split('');
-    const person2EmailChars = person2.email_address.split('');
+    const person1EmailChars = person1.emailAddress.split('');
+    const person2EmailChars = person2.emailAddress.split('');
     for (let i = 0; i < person1EmailChars.length; i += 1) {
       for (let j = 0; j < person2EmailChars.length; j += 1) {
         const person1Char = person1EmailChars[i];
@@ -78,7 +78,7 @@ class DuplicatesTable extends React.PureComponent {
               <TableRow key={uuidv1()}>
                 <TableCell>
                   {persons.map(person => (
-                    <span key={uuidv1()}>{person.email_address}&nbsp;</span>
+                    <span key={uuidv1()}>{person.emailAddress}&nbsp;</span>
                   ))}
                 </TableCell>
               </TableRow>
