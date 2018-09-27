@@ -22,7 +22,7 @@ import LoadingMessage from 'components/LoadingMessage/Loadable';
 import ErrorMessage from 'components/ErrorMessage/Loadable';
 import PeopleTable from 'components/PeopleTable/Loadable';
 import FrequencyCountTable from 'containers/FrequencyCountTable/Loadable';
-import DuplicatesTable from 'components/DuplicatesTable/Loadable';
+import DuplicatesTable from 'containers/DuplicatesTable/Loadable';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import {
