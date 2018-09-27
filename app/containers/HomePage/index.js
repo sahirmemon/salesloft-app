@@ -18,8 +18,10 @@ import { FormattedMessage } from 'react-intl';
 import { Button, Grid, Paper, Typography } from '@material-ui/core';
 import styled from 'styled-components';
 
+import LoadingMessage from 'components/LoadingMessage/Loadable';
+import ErrorMessage from 'components/ErrorMessage/Loadable';
 import PeopleTable from 'components/PeopleTable/Loadable';
-import FrequencyCountTable from 'components/FrequencyCountTable/Loadable';
+import FrequencyCountTable from 'containers/FrequencyCountTable/Loadable';
 import DuplicatesTable from 'components/DuplicatesTable/Loadable';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
@@ -77,9 +79,7 @@ export class HomePage extends React.PureComponent {
     if (loading) {
       return (
         <Background>
-          <Typography variant="subheading" gutterBottom>
-            <FormattedMessage {...messages.loading} />
-          </Typography>
+          <LoadingMessage />
         </Background>
       );
     }
@@ -87,9 +87,7 @@ export class HomePage extends React.PureComponent {
     if (error) {
       return (
         <Background>
-          <Typography variant="subheading" gutterBottom>
-            {error}
-          </Typography>
+          <ErrorMessage error={error} />
         </Background>
       );
     }
@@ -124,9 +122,7 @@ export class HomePage extends React.PureComponent {
                   <FormattedMessage {...messages.hideFrequencyCountButton} />
                 )}
               </Button>
-              {toggleFrequencyCountTable && (
-                <FrequencyCountTable people={people} />
-              )}
+              {toggleFrequencyCountTable && <FrequencyCountTable />}
             </Grid>
           </Grid>
         </Background>

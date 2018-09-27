@@ -10,10 +10,6 @@ export default defineMessages({
     id: 'app.components.HomePage.header',
     defaultMessage: 'Level 1: People',
   },
-  loading: {
-    id: 'app.components.HomePage.loading',
-    defaultMessage: 'Looks like we are still loading...',
-  },
   frequencyCount: {
     id: 'app.components.HomePage.frequencyCount',
     defaultMessage: 'Level 2: Frequency Count',
